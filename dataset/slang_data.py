@@ -6,6 +6,8 @@
 __all__ = ["SLANG_DATA"]
 
 SLANG_DATA = {
+    "bruntusan": "beruntus",
+    "lembap": "lembab",
     "recomend": "rekomendasi",
     "recommend": "rekomendasi",
     "rekomen": "rekomendasi",
