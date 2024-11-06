@@ -36,7 +36,7 @@ def scrape(url: str, page_limit: int):
 def writeFile(data: list, path: str):
   # output ke file CSV
   heading = ['Tanggal', 'Username', 'Rekomendasi', 'Review'] #membuat heading tabel
-  with open('scraped-whitelab-niacinamide.csv', 'w', newline='', encoding='utf-8') as file: #memasukkan kedalam variabel file
+  with open(path, 'w', newline='', encoding='utf-8') as file: #memasukkan kedalam variabel file
     writer = csv.writer(file) #menyimpan dalam bentuk csv
     writer.writerow(heading) #menuliskan heading
     for d in data: #looping data
@@ -47,23 +47,29 @@ page_info = [
   {
     'url': 'https://reviews.femaledaily.com/products/treatment/serum-essence/somethinc/5-niacinamide-moisture-sabi-beet-serum',
     # 'page_limit': 100, #data ~2022
-    'page_limit': 421,
-    'path': 'scraped-somethinc-niacinamide.csv',
+    'page_limit': 635,
+    'path': 'scraped-somethinc-niacinamide-all.csv',
   },
   {
     'url': 'https://reviews.femaledaily.com/products/treatment/serum-essence/whitelab/brightening-face-serum-32',
     # 'page_limit': 50, #data ~2022
-    
-    'path': 'scraped-whitelab-niacinamide.csv',
+    'page_limit': 348,
+    'path': 'scraped-whitelab-niacinamide-all.csv',
   },
   {
     'url': 'https://reviews.femaledaily.com/products/treatment/serum-essence/the-ordinary/the-ordinary-niacinamide-10-zinc-1',
     # 'page_limit': 50, #data~2022
-    'page_limit': 90,
-    'path': 'scraped-the-ordinary-niacinamide.csv',
+    'page_limit': 543,
+    'path': 'scraped-the-ordinary-niacinamide-all.csv',
   }
 ]
 
 for info in page_info:
-  result = scrape(info['url'], info['page_limit'])
-  writeFile(result, info['path'])
+  sze = 0
+  try:
+    result = scrape(info['url'], info['page_limit'])
+    sze = len(result)
+    writeFile(result, info['path'])
+  except:
+    writeFile(result, info['path'] + 'error.csv')
+    print('stopeed', sze)
