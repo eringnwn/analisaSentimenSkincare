@@ -31,10 +31,26 @@ def handle_stopwords(review, stopwords):
     val = re.search(r"^[a-zA-Z][a-zA-Z0-9]*$", word) #menghilangkan karakter selain huruf didalam kata
     if (word in stopwords or val is None):
       continue
+    elif (word == 'enggak'):
+      feature_vector.append('tidak')
     else:
       feature_vector.append(word)
   for_stemming = ' '.join(feature_vector)
   return feature_vector, for_stemming
+
+def handle_negative(review):
+  negative_review = []
+  review = review.split(' ')
+  for i in range(len(review)):
+    word = review[i]
+    if i == 0 or (review[i-1] != 'enggak' and review[i-1] != 'tidak'):
+      negative_review.append(word)
+    else:
+      negative_review.pop()
+      word = 'tidak_'+word
+      negative_review.append(word)
+  for_stemming = ' '.join(negative_review)
+  return for_stemming
 
 # Remove emoji, punctuation, symbol
 def preprocess(text):
@@ -45,10 +61,6 @@ def preprocess(text):
   text = text.translate(str.maketrans('', '', string.punctuation))
 
   text = replace_word_elongation(text)  # replace WE
-
-  # Change emoji to words
-  text = emoji_to_words(text)
-  text = text.translate(str.maketrans(string.punctuation, " " * len(string.punctuation)))
 
   # Remove HTML tags
   text = remove_html(text) 
@@ -68,6 +80,7 @@ def preprocess(text):
   factory = StemmerFactory()
   stemmer = factory.create_stemmer()
   text = stemmer.stem(text)
+  text = handle_negative(text)
   return text
 
 
