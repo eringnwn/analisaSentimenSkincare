@@ -78,22 +78,19 @@ def predict_stage(model, vectorizer, input):
     input_tf = vectorizer.transform(preprocessed_input)
     prediction = model.predict(input_tf)
     res = prediction[0]
-    # if res == 2:
-    #     st.success(f"Sentimen Positif")
-    # elif res == 1:
-    #     st.info(f"Sentimen Netral")
-    # else :
-    #     st.error(f"Sentimen Negatif")
+    print(res)
+    if res == 1:
+        res = "Sentimen Positif"
+    else :
+        res = "Sentimen Negatif"
 
-    return res
+    return {'data': res}
 
 @app.post("/sentimen")
 async def sentimen(text:userInput):
-    # print(text.text)
-    # return 
     model = joblib.load("./Skincare-Sentiment-Analysis.joblib")
     vectorizer = joblib.load('./skincare-vectorizer.pkl')
-    prediction = predict_stage(model, vectorizer, "Sejauh ini sih belum kelihatan hasilnya")
+    prediction = predict_stage(model, vectorizer, text.text)
     return prediction 
         # predict = st.button("Submit Review")
         # if predict:
