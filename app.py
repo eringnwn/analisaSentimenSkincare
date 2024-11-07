@@ -76,10 +76,8 @@ def predict_stage(model, vectorizer, input):
     input_tf = vectorizer.transform(preprocessed_input)
     prediction = model.predict(input_tf)
     res = prediction[0]
-    if res == 2:
-        st.success(f"Sentimen Positif")
-    elif res == 1:
-        st.info(f"Sentimen Netral")
+    if res == 1:
+        st.info(f"Sentimen Positif")
     else :
         st.error(f"Sentimen Negatif")
 
