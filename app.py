@@ -18,9 +18,9 @@ def get_stopwords(file_path):
   file_stopwords = open(file_path,'r')
   row = file_stopwords.readline()
   while row:
-      word = row.strip()
-      stopwords.append(word)
-      row = file_stopwords.readline()
+    word = row.strip()
+    stopwords.append(word)
+    row = file_stopwords.readline()
   file_stopwords.close()
   return stopwords
 
@@ -85,23 +85,23 @@ def preprocess(text):
 
 
 def predict_stage(model, vectorizer, input):
-    preprocessed_input = [preprocess(input)]
-    input_tf = vectorizer.transform(preprocessed_input)
-    prediction = model.predict(input_tf)
-    res = prediction[0]
-    if res == 1:
-        st.info(f"Sentimen Positif")
-    else :
-        st.error(f"Sentimen Negatif")
+  preprocessed_input = [preprocess(input)]
+  input_tf = vectorizer.transform(preprocessed_input)
+  prediction = model.predict(input_tf)
+  res = prediction[0]
+  if res == 1:
+    st.info(f"Sentimen Positif")
+  else :
+    st.error(f"Sentimen Negatif")
 
-    return prediction
+  return prediction
 
 
 if input_str is None:
-    st.text("Please fill in your review")
+  st.text("Please fill in your review")
 else:
-    model = joblib.load("../Skincare-Sentiment-Analysis.joblib")
-    vectorizer = joblib.load('../skincare-vectorizer.pkl')
-    predict = st.button("Submit Review")
-    if predict:
-        prediction = predict_stage(model, vectorizer, input_str)
+  model = joblib.load("../Skincare-Sentiment-Analysis.joblib")
+  vectorizer = joblib.load('../skincare-vectorizer.pkl')
+  predict = st.button("Submit Review")
+  if predict:
+    prediction = predict_stage(model, vectorizer, input_str)
