@@ -13,7 +13,7 @@ from dataset.slang_data import SLANG_DATA
 st.write('''
 # Sentiment Classification
 ''')
-st.write("Sebuah detektor sentimen berbasis SVM, TF-IDF, and SMOTE-TOMEK yang dilatih dengan dataset review skincare pada website Female Daily")
+st.write("Sebuah detektor sentimen berbasis SVM, TF-IDF, and SMOTE-TOMEK yang dilatih dengan dataset review skincare serum niacinamide pada website Female Daily")
 input_str = st.text_area('Review')
 
 def get_stopwords(file_path):
@@ -131,7 +131,6 @@ def predict_stage(model, vectorizer, input):
   input_tf = vectorizer.transform(preprocessed_input)
   prediction = model.predict(input_tf)
   res = prediction[0]
-  print(res)
   if res == 1:
     st.info(f"Sentimen Positif")
   else :
