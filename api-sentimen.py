@@ -100,7 +100,7 @@ def predict_stage(model, vectorizer, input):
 
 @app.post("/sentimen")
 async def sentimen(text:userInput):
-  model = joblib.load("./Skincare-Sentiment-Analysis.joblib")
+  model = joblib.load("./Skincare-Sentiment-Analysis-SVM.joblib")
   vectorizer = joblib.load('./skincare-vectorizer.pkl')
   prediction = predict_stage(model, vectorizer, text.text)
   return prediction
