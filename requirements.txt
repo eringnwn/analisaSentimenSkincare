@@ -1,2 +1,15 @@
 indoNLP
 pysastrawi
+requests
+bs4
+streamlit
+wordcloud
+joblib
+tensorflow
+pandas
+numpy
+matplotlib
+seaborn
+imblearn
+scikit-learn
+tqdm
