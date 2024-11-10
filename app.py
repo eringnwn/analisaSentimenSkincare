@@ -100,8 +100,8 @@ def predict_stage(model, vectorizer, input):
 if input_str is None:
   st.text("Please fill in your review")
 else:
-  model = joblib.load("../Skincare-Sentiment-Analysis.joblib")
-  vectorizer = joblib.load('../skincare-vectorizer.pkl')
+  model = joblib.load("./Skincare-Sentiment-Analysis-SVM.joblib")
+  vectorizer = joblib.load('./skincare-vectorizer.pkl')
   predict = st.button("Submit Review")
   if predict:
     prediction = predict_stage(model, vectorizer, input_str)
