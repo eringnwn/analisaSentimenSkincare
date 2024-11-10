@@ -1,4 +1,4 @@
-# **ANALISIS SENTIMEN ULASAN PRODUK KECANTIKAN SERUM NIACINAMIDE PADA LAMAN FEMALE DAILY MENGGUNAKAN METODE NAÏVE BAYES DAN SVM BERBASIS SMOTE-TOMEK **
+# **ANALISIS SENTIMEN ULASAN PRODUK KECANTIKAN SERUM NIACINAMIDE PADA LAMAN FEMALE DAILY MENGGUNAKAN METODE NAÏVE BAYES DAN SVM BERBASIS SMOTE-TOMEK**
 
 Sebuah detektor sentimen berbasis SVM, TF-IDF, and SMOTE-TOMEK yang dilatih dengan dataset review skincare serum niacinamide pada website Female Daily.
 Terdiri dari dataset (csv), ML model, file notebook, web scraping code, API dan web app.
@@ -18,7 +18,7 @@ Program Studi Teknik Informatika, Fakultas Informatika, Universitas Mikroskil
 - `pip install -r requirements.txt`, then
 - to run web app  : `streamlit run app.py`
 - to start API: `fastapi dev api-sentimen.py`
-  Request body for API in JSON format:
+- request body for API in JSON format:
   ```
     { "text" : "Ini adalah sentimen yang akan dianalisis" }
   ```
