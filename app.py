@@ -66,20 +66,6 @@ def handle_slang(text):
   SLANG_PATTERN = rf"(?i)\b({'|'.join(SLANG_DATA.keys())})\b"
   return re.sub(SLANG_PATTERN, lambda mo: SLANG_DATA[mo.group(0).lower()], text)
 
-def handle_negative(review):
-  negative_review = []
-  review = review.split(' ')
-  for i in range(len(review)):
-    word = review[i]
-    if i == 0 or (review[i-1] != 'enggak' and review[i-1] != 'tidak'):
-      negative_review.append(word)
-    else:
-      negative_review.pop()
-      word = 'tidak_'+word
-      negative_review.append(word)
-  for_stemming = ' '.join(negative_review)
-  return for_stemming
-
 def preprocess(text):
   # Casefolding to Lowercase
   text = text.lower()
@@ -93,9 +79,6 @@ def preprocess(text):
   text = re.sub(r'[^\x00-\x7F]+', ' ', text) #remove non-ascii character (misalnya emoji). [^\x00-\x7F] artinya hanya ambil yang ascii-nya dari 0 sd 127
 
   text = replace_word_elongation(text)  # replace WE
-  # Change emoji to words, then remove the punctuation from emoji-to-word process
-  # text = emoji_to_words(text)
-  # text = text.translate(str.maketrans(string.punctuation, " " * len(string.punctuation)))
 
   # Remove HTML tags
   text = remove_html(text)
